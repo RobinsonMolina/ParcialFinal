@@ -1,17 +1,10 @@
 const path = require('path');
 const express = require('express');
-const mongoose = require('mongoose');
 const Reservation = require('./models/reservation');
+require('./drivers/connect_db');
 
 const app = express();
 const PORT = 3000;
-
-const URI = "mongodb+srv://jazminmoreno01:hGFoGK5veGBf0M76@cluster0.he758.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-mongoose.set('strictQuery', false);
-
-mongoose.connect(URI)
-    .then(() => console.log('Conexión exitosa a la base de datos'))
-    .catch(err => console.error('Error al conectar a la base de datos: ', err));
 
 app.use(express.static('public'));
 app.use('/controller', express.static(path.join(__dirname, 'controller')));
