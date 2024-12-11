@@ -4,8 +4,8 @@ for (let i = 1; i <= 100; i++) {
     const seat = document.createElement('button');
     seat.className = 'btn btn-outline-secondary seat';
     seat.textContent = i;
-    seat.setAttribute('data-seat-number', i.toString());  // Convertir el número de asiento a String
-    seat.onclick = () => reserveSeat(i.toString());  // Asegurarte de que se pase como String
+    seat.setAttribute('data-seat-number', i.toString());
+    seat.onclick = () => reserveSeat(i.toString());
     seatsContainer.appendChild(seat);
 }
 
@@ -60,7 +60,5 @@ async function updateReservedSeats() {
         }
     });
 }
-
-
 
 updateReservedSeats();
