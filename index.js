@@ -38,6 +38,14 @@ app.post('/api/reservations', async (req, res) => {
         return res.status(400).json({ error: 'Este asiento ya está reservado.' });
     }
 
+    const newReservation = new Reservation({
+        seatNumber: seat,  // seat es un String, se mantiene igual
+        isAvailable: false,
+        userId: customer,
+        price: 10,  // Ejemplo de precio
+        room: 'CineMax',  // Ejemplo de sala
+    });
+
     try {
         await newReservation.save();
         res.status(201).json({ message: 'Reserva creada correctamente.' });
@@ -45,6 +53,8 @@ app.post('/api/reservations', async (req, res) => {
         res.status(500).json({ error: 'Error al crear la reserva' });
     }
 });
+
+
 
 app.get('/api/report', async (req, res) => {
     try {

@@ -4,12 +4,13 @@ for (let i = 1; i <= 100; i++) {
     const seat = document.createElement('button');
     seat.className = 'btn btn-outline-secondary seat';
     seat.textContent = i;
-    seat.onclick = () => reserveSeat(i);
+    seat.setAttribute('data-seat-number', i.toString());  // Convertir el número de asiento a String
+    seat.onclick = () => reserveSeat(i.toString());  // Asegurarte de que se pase como String
     seatsContainer.appendChild(seat);
 }
 
 async function reserveSeat(seatNumber) {
-    const seatBtn = document.querySelector(`.seat:nth-child(${seatNumber})`);
+    const seatBtn = document.querySelector(`.seat[data-seat-number="${seatNumber}"]`);
     if (seatBtn.classList.contains('btn-danger')) {
         alert('Este asiento ya está reservado.');
         return;
@@ -51,7 +52,7 @@ async function updateReservedSeats() {
     const response = await fetch('/api/reservations');
     const reservations = await response.json();
     reservations.forEach(reservation => {
-        const seatBtn = document.querySelector(`.seat:nth-child(${reservation.seat})`);
+        const seatBtn = document.querySelector(`.seat[data-seat-number="${reservation.seatNumber}"]`);
         if (seatBtn) {
             seatBtn.classList.remove('btn-outline-secondary');
             seatBtn.classList.add('btn-danger');
@@ -59,5 +60,7 @@ async function updateReservedSeats() {
         }
     });
 }
+
+
 
 updateReservedSeats();
