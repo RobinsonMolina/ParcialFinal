@@ -38,6 +38,12 @@ app.post('/api/reservations', async (req, res) => {
         return res.status(400).json({ error: 'Este asiento ya está reservado.' });
     }
 
+    const newReservation = new Reservation({
+        seatNumber: seat,
+        isAvailable: false,
+        userId: customer,
+    });
+
     try {
         await newReservation.save();
         res.status(201).json({ message: 'Reserva creada correctamente.' });
