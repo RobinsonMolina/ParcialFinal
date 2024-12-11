@@ -50,7 +50,7 @@ app.get('/api/report', async (req, res) => {
         const reservations = await Reservation.find({ isAvailable: false });
         const seatsSold = reservations.length;
         const totalSales = seatsSold * 15000;
-        const occupancy = ((seatsSold / 32) * 100).toFixed(2);
+        const occupancy = ((seatsSold / 100) * 100).toFixed(2);
 
         res.json({
             seatsSold,
