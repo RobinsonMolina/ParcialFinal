@@ -1,8 +1,5 @@
-// seats.js
-
 const seatsContainer = document.getElementById('seats');
 
-// Renderizar asientos
 for (let i = 1; i <= 100; i++) {
     const seat = document.createElement('button');
     seat.className = 'btn btn-outline-secondary seat';
@@ -11,7 +8,6 @@ for (let i = 1; i <= 100; i++) {
     seatsContainer.appendChild(seat);
 }
 
-// Reservar asiento
 async function reserveSeat(seatNumber) {
     const seatBtn = document.querySelector(`.seat:nth-child(${seatNumber})`);
     if (seatBtn.classList.contains('btn-danger')) {
@@ -36,7 +32,6 @@ async function reserveSeat(seatNumber) {
     }
 }
 
-// Obtener informe
 async function getReport() {
     try {
         const response = await fetch('/api/report');
@@ -52,7 +47,6 @@ async function getReport() {
     }
 }
 
-// Actualizar asientos reservados desde el servidor
 async function updateReservedSeats() {
     const response = await fetch('/api/reservations');
     const reservations = await response.json();
